@@ -6,6 +6,6 @@ const BlogSchema = new mongoose.Schema({
     body: String
   });
 
-var Blog = mongoose.model("Campround", BlogSchema);
+var Blog = mongoose.model("Blog", BlogSchema);
 
 module.exports = Blog;
