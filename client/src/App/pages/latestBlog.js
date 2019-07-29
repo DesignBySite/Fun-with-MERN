@@ -13,7 +13,7 @@ class LatestBlog extends React.Component {
     }
 
     saveCat = () => {
-        fetch('/newestCampground')
+        fetch('/newest-blog')
         .then(res => res.json())
         .then(list => {
           this.setState({ list: [list] })

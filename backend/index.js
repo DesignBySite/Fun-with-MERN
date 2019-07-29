@@ -31,7 +31,7 @@ app.get('/api/getList', (req, res) => {
   })
 });
 
-app.get('/newestCampground', (req, res) => {
+app.get('/newest-blog', (req, res) => {
   Blog.findOne({}, {}, { sort: { 'name': -1}}, (err, blog) => {
     if (err) {
       console.log(err);
@@ -85,7 +85,7 @@ app.post('/create', (req, res) => {
       console.log('error', err);
       return;
     }
-    console.log("added new campground", res);
+    console.log("added new blog", res);
   });
   res.send(res.status)
 });

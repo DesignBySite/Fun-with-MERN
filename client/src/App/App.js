@@ -47,7 +47,7 @@ class App extends Component {
           <Route path='/users' render={() => <Users auth={this.state.userAuth} click={this.signInHandler} />}/>
           <Route path='/create-new-blog' render={() => <CreateBlog auth={this.state.userAuth} click={this.signInHandler} />}/>
           <Route path='/contact' component={Contact}/>
-          <Route path='/latestBlog' component={LatestBlog}/>
+          <Route path='/latest-blog' component={LatestBlog}/>
         </Switch>
       </div>
     )
