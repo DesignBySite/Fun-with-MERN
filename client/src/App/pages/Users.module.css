@@ -1,0 +1,40 @@
+.InputField {
+    display: grid;
+    grid-template-rows: repeat(2, min-content);
+    justify-content: center;
+    grid-row-gap: 5px;
+}
+
+.InputGrid {
+    display: grid;
+    grid-template-rows: 2 min-content;
+    grid-row-gap: 10px;
+}
+.InputLabel {
+    font-size: 14px;
+}
+
+.SignIn {
+    padding: 3px 5px;
+    border-radius: 2px;
+    justify-self: center;
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    transition: all .1s;
+}
+
+.SignIn:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+.SignIn:active {
+    color: white;
+    background-color: black;
+    transition: all .05s;
+}
+.Title {
+    display: grid;
+    justify-content: center;
+}

@@ -1,0 +1,43 @@
+.Navbar {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    justify-content: space-between;
+    background-color: black;
+    height: 40px;
+}
+
+.OptionBtns {
+    display: grid;
+    grid-template-columns: repeat(5, max-content);
+    justify-content: center;
+}
+.NavbarBtn {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all .2s;
+    padding: 0 10px;
+}
+
+.NavbarBtn:hover {
+    background-color: red;
+    font-size: 22px;
+}
+
+.NavbarBtnName {
+    display: grid;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+.homeBtn {
+    justify-self: center;
+    /* width: 200px; */
+}

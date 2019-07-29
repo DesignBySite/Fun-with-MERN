@@ -1,0 +1,46 @@
+.BlogPostHolder{
+    margin-top: 30px;
+    display: grid;
+    justify-content: center;
+}
+
+.BlogPostForm {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 500px;
+    grid-row-gap: 10px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.BlogPostInput {
+    display: grid;
+    grid-row-gap: 5px;
+}
+
+.BlogPostInput textarea {
+    height: 80px;
+}
+.BlogPostInput label{
+    width: min-content;
+}
+
+.BlogPostSubmitHolder {
+    display: grid;
+    justify-content: space-between;
+}
+.BlogPostBtn {
+    justify-self: start;
+    background-color: white;
+    border: 2px solid green;
+    color: green;
+    border-radius: 3px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all.2s;
+}
+
+.BlogPostBtn:hover {
+    background-color: green;
+    color: white;
+}
