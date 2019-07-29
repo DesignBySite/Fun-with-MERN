@@ -30,7 +30,7 @@ class Navbar extends Component {
                         <button className={styles.NavbarBtn}>
                             My blogs
                         </button>
-                    </Link>fd
+                    </Link>
                     <Link to={'./latestBlog'}>
                         <button className={styles.NavbarBtn}>
                             Latest Blog

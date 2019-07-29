@@ -5,10 +5,10 @@ const express = require('express'),
 
 const app = express();
 let db;
-const Campground = require('./Schemas/blog');
+const Blog = require('./Schemas/blog');
 const User = require('./Schemas/user');
 
-mongoose.connect('mongodb://localhost:27017/kitties', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/blogs', {useNewUrlParser: true});
 
 db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -21,32 +21,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-// const campgroundSchema = new mongoose.Schema({
-//   name: String,
-//   image: String
-// });
-
-// var Campground = mongoose.model("Campround", campgroundSchema);
-
-
 app.get('/api/getList', (req, res) => {
-  let result;
-  Campground.find({}, (err, campgrounds) => {
+  Blog.find({}, (err, blogs) => {
     if (err) {
       console.log(err);
       return;
     }
-    res.send(campgrounds);
+    res.send(blogs);
   })
 });
 
 app.get('/newestCampground', (req, res) => {
-  Campground.findOne({}, {}, { sort: { 'name': -1}}, (err, camp) => {
+  Blog.findOne({}, {}, { sort: { 'name': -1}}, (err, blog) => {
     if (err) {
       console.log(err);
       return;
     }
-    res.send(camp);
+    res.send(blog);
   });
 })
 
@@ -66,10 +57,11 @@ app.get('/sign-in/:user/:password', (req, res) => {
   })
 })
 
+// Route to create new user
 app.post('/create-user', (req, res) => {
   const user = {
     userName: "knielsen0506",
-    password: "nrpxKReM84!!",
+    password: '',
     first_name: "Kevin",
     last_name: "Nielsen",
     userType: "Admin"
@@ -87,8 +79,8 @@ app.post('/create', (req, res) => {
   const name = req.body.name;
   const image = req.body.image;
   const description = req.body.body;
-  const createCampground = {name: name, image: image, body: description};
-  Campground.create(createCampground, (err, res) => {
+  const createBlog = {name: name, image: image, body: description};
+  Blog.create(createBlog, (err, res) => {
     if (err) {
       console.log('error', err);
       return;

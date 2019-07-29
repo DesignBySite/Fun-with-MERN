@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const campgroundSchema = new mongoose.Schema({
+const BlogSchema = new mongoose.Schema({
     name: String,
     image: String,
     body: String
   });
 
-var Campground = mongoose.model("Campround", campgroundSchema);
+var Blog = mongoose.model("Campround", BlogSchema);
 
-module.exports = Campground;
+module.exports = Blog;
