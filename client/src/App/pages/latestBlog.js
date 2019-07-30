@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './latestBlog.module.css';
 
 class LatestBlog extends React.Component {
@@ -9,20 +10,18 @@ class LatestBlog extends React.Component {
     }
 }
     componentDidMount() {
-        this.saveCat();
+        this.getLatestBlog();
     }
 
-    saveCat = () => {
+    getLatestBlog = () => {
         fetch('/newest-blog')
         .then(res => res.json())
         .then(list => {
-          this.setState({ list: [list] })
+        this.setState({ list: [list] })
         });
     }
   render() {
     let { list } = this.state;
-    console.table(list);
-    console.log(list.length);
     if (list.length) {
       // list = list.splice(0, 1);
     }
@@ -34,8 +33,10 @@ class LatestBlog extends React.Component {
                         {list.map(item => {
                             return(
                                 <div className={styles.Item} key={item._id}>
-                                    <p className={styles.Title}>{item.name}</p>
-                                    <img className={styles.Image} src={item.image} alt={item.name}/>
+                                    <Link to={`./blog-${item._id}`} onClick={() => this.props.goToBlogClick(item._id)}>
+                                        <p className={styles.Title}>{item.name}</p>
+                                        <img className={styles.Image} src={item.image} alt={item.name}/>
+                                    </Link>
                                 </div>
                             );
                         })}

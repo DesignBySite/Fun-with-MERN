@@ -90,6 +90,25 @@ app.post('/create', (req, res) => {
   res.send(res.status)
 });
 
+app.get('/blog/delete/:id', (req, res) => {
+  const blogToDelete = req.params.id;
+  console.dir(blogToDelete);
+  Blog.deleteOne({_id: blogToDelete}, (err, res) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    return;
+  });
+
+  Blog.find({}, (err, blogs) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.send(blogs);
+  });
+})
 const port = process.env.PORT || 5000;
 app.listen(port);
 

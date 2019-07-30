@@ -8,6 +8,8 @@ import Contact from './pages/Contact';
 import LatestBlog from './pages/latestBlog';
 import Navbar from './components/Navbar/Navbar';
 import CreateBlog from './pages/CreateBlog';
+import BlogHolder from './components/BlogHolder/BlogHolder';
+import ListServicesProvider from './services/ListServices';
 
 
 class App extends Component {
@@ -16,8 +18,20 @@ class App extends Component {
     this.state = {
       user: null,
       userType: null,
-      userAuth: false
+      userAuth: false,
+      list: [],
+      listItem: {
+        _id: '',
+        name: '',
+        image: '',
+        body: ''
+      }
     }
+    this.ListServicesProvider = new ListServicesProvider();
+  }
+
+  componentDidMount() {
+    this.ListServicesProvider.getList().then(res => this.setState({ list: res }));
   }
 
   signInHandler = async(userName, password) => {
@@ -37,17 +51,29 @@ class App extends Component {
     }
   }
 
+  getListItem = id => {
+    console.log('called');
+    this.state.list.forEach(x => {
+      console.log(x);
+
+      if (x._id === id) {
+        this.setState({ listItem: x}, () => console.log(this.state.listItem));
+      }
+    })
+  }
+
   render() {
     const App = () => (
       <div>
         <Navbar userName={this.state.user} />
         <Switch>
           <Route exact path='/' render={() => <Home user={this.state.user}/>}/>
-          <Route path='/list' component={List}/>
+          <Route path='/list' render={() => <List goToBlogClick={this.getListItem}/>}/>
           <Route path='/users' render={() => <Users auth={this.state.userAuth} click={this.signInHandler} />}/>
           <Route path='/create-new-blog' render={() => <CreateBlog auth={this.state.userAuth} click={this.signInHandler} />}/>
           <Route path='/contact' component={Contact}/>
-          <Route path='/latest-blog' component={LatestBlog}/>
+          <Route path='/latest-blog' render={() => <LatestBlog goToBlogClick={this.getListItem}/>}/>
+          <Route path={`/blog-${this.state.listItem._id}`} render={() => <BlogHolder title={this.state.listItem.name} image={this.state.listItem.image} description={this.state.listItem.body}/>}/>
         </Switch>
       </div>
     )

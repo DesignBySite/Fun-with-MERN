@@ -36,11 +36,11 @@ class Navbar extends Component {
                             Latest Blog
                         </button>
                     </Link>
-                    <Link to={'./contact'}>
+                    {/* <Link to={'./contact'}>
                         <button className={styles.NavbarBtn}>
                             Contact Me
                         </button>
-                    </Link>
+                    </Link> */}
                     <Link to='./create-new-blog'>
                         <button className={styles.NavbarBtn}>
                             Create

@@ -5,14 +5,17 @@ import styles from './CreateBlog.module.css';
 class CreateBlog extends Component {
     constructor(props) {
         super(props)
-        this.name = null;
-        this.image = null;
-        this.description = null;
-        this.success = false;
+        this.state = {
+            name: null,
+            image: null,
+            description: null,
+            success: false,
+            successMsg: <p>Post was successfully created</p>
+        }
     }
     createNewBlog = (name, image, description) => {
-        if ((this.name || this.image || this.description) == null) {
-            console.log(this.name, this.image, this.description);
+        if ((this.state.name || this.state.image || this.state.description) == null) {
+            console.log(this.state.name, this.state.image, this.state.description);
             console.log('is null');
             return;
         }
@@ -27,8 +30,9 @@ class CreateBlog extends Component {
         })
         .then(res => {
             if (res.status === 200 ) {
-                this.success = true;
-                console.log(this.success, res.status);
+                this.setState({success: true});
+
+                console.log(this.state.success, res.status);
             }
         });
     }
@@ -40,26 +44,26 @@ class CreateBlog extends Component {
                     <div className={styles.BlogPostInput}>
                         <label>Name</label>
                         <input type="text" onChange={e =>  {
-                                this.name = e.target.value
+                                this.setState({name: e.target.value})
                             }}/>
                     </div>
                     <div className={styles.BlogPostInput}>
                         <label>Image</label>
                         <input type="text" onChange={e =>  {
-                                this.image = e.target.value
+                                this.setState({image: e.target.value})
                             }}/>
                     </div>
                     <div className={styles.BlogPostInput}>
                         <label>Body</label>
                         <textarea type="text" onChange={e =>  {
-                                this.description = e.target.value
+                                this.setState({description: e.target.value})
                             }}/>
                     </div>
                     <div className={styles.BlogPostSubmitHolder}>
-                        <button className={styles.BlogPostBtn} onClick={() => this.createNewBlog(this.name, this.image, this.description)}>
+                        <button className={styles.BlogPostBtn} onClick={() => this.createNewBlog(this.state.name, this.state.image, this.state.description)}>
                             Submit
                         </button>
-                        {this.success ? <p>Post was successfully created</p> : null}
+                        {this.state.success ? this.state.successMsg : null}
                     </div>
                 </div>
             </div>

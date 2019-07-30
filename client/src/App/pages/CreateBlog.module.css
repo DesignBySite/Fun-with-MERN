@@ -27,8 +27,17 @@
 
 .BlogPostSubmitHolder {
     display: grid;
-    justify-content: space-between;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 30px;
+    align-content: center;
 }
+
+.BlogPostSubmitHolder p {
+    justify-self: center;
+    align-self: center;
+    margin: 0;
+}
+
 .BlogPostBtn {
     justify-self: start;
     background-color: white;
