@@ -19,7 +19,7 @@ class CreateBlog extends Component {
             console.log('is null');
             return;
         }
-        fetch('/create', {
+        fetch('/api/blog/create', {
             method: 'POST',
             body: JSON.stringify({
                 name: name,

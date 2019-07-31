@@ -9,7 +9,7 @@ class Navbar extends Component {
         this.auth = props.auth;
     }
     create = () => {
-        fetch('/create-user', {
+        fetch('/api/user/create', {
             method: 'POST'
         })
         .then(res => console.log(res));

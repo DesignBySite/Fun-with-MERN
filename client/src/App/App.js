@@ -36,7 +36,7 @@ class App extends Component {
 
   signInHandler = async(userName, password) => {
     try {
-      await fetch(`/sign-in/${userName}/${password}`, {
+      await fetch(`/api/sign-in/${userName}/${password}`, {
         method: 'GET',
         headers: {"Content-Type": "application/json"}
       })

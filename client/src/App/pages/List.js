@@ -25,7 +25,7 @@ class List extends Component {
 
     deletePostHandler = _id => {
         console.log(_id);
-        fetch(`/blog/delete/${_id}`, {
+        fetch(`/api/blog/delete/${_id}`, {
             method: 'GET'
         })
         .then(res => res.json())

@@ -14,7 +14,7 @@ class LatestBlog extends React.Component {
     }
 
     getLatestBlog = () => {
-        fetch('/newest-blog')
+        fetch('/api/blog/new')
         .then(res => res.json())
         .then(list => {
         this.setState({ list: [list] })

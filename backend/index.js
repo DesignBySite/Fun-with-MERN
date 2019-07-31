@@ -4,24 +4,35 @@ const express = require('express'),
       bodyParser = require('body-parser');
 
 const app = express();
-let db;
 const Blog = require('./Schemas/blog');
 const User = require('./Schemas/user');
+const port = process.env.PORT || 5000;
+let db = mongoose.connection;
 
+// Connects to mongo db
 mongoose.connect('mongodb://localhost:27017/blogs', {useNewUrlParser: true});
 
-db = mongoose.connection;
+// Mongoose connection handling
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Successfully connected');
 })
 
+// Express rules
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin' , 'http://localhost:27017');
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append("Access-Control-Allow-Headers", "Origin, Accept,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+  res.append('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 
-app.get('/api/getList', (req, res) => {
+// Gets list of all the current blogs
+app.get('/api/blog/all', (req, res) => {
   Blog.find({}, (err, blogs) => {
     if (err) {
       console.log(err);
@@ -31,7 +42,8 @@ app.get('/api/getList', (req, res) => {
   })
 });
 
-app.get('/newest-blog', (req, res) => {
+// Gets list of all the current blogs, sorts them newest to oldest, and returns the newest one
+app.get('/api/blog/new', (req, res) => {
   Blog.findOne({}, {}, { sort: { 'name': -1}}, (err, blog) => {
     if (err) {
       console.log(err);
@@ -41,7 +53,8 @@ app.get('/newest-blog', (req, res) => {
   });
 })
 
-app.get('/sign-in/:user/:password', (req, res) => {
+// Finds and returns correct user if in the DB
+app.get('/api/sign-in/:user/:password', (req, res) => {
   const userName = req.params.user;
   const password = req.params.password;
   console.log(req.params);
@@ -58,7 +71,7 @@ app.get('/sign-in/:user/:password', (req, res) => {
 })
 
 // Route to create new user
-app.post('/create-user', (req, res) => {
+app.post('/api/user/create', (req, res) => {
   const user = {
     userName: "knielsen0506",
     password: '',
@@ -75,7 +88,8 @@ app.post('/create-user', (req, res) => {
   });
 });
 
-app.post('/create', (req, res) => {
+// Route to create new blog
+app.post('/api/blog/create', (req, res) => {
   const name = req.body.name;
   const image = req.body.image;
   const description = req.body.body;
@@ -90,7 +104,8 @@ app.post('/create', (req, res) => {
   res.send(res.status)
 });
 
-app.get('/blog/delete/:id', (req, res) => {
+// Route to delete a blog
+app.get('/api/blog/delete/:id', (req, res) => {
   const blogToDelete = req.params.id;
   console.dir(blogToDelete);
   Blog.deleteOne({_id: blogToDelete}, (err, res) => {
@@ -109,7 +124,8 @@ app.get('/blog/delete/:id', (req, res) => {
     res.send(blogs);
   });
 })
-const port = process.env.PORT || 5000;
+
+
 app.listen(port);
 
 console.log(`App is listening on port ${port}`);
