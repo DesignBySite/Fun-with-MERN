@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import './App.css';
-import Home from './pages/Home';
-import List from './pages/List';
-import Users from './pages/Users';
-import Contact from './pages/Contact';
-import LatestBlog from './pages/latestBlog';
+import styles from './App.css';
+import Home from './pages/Homepage/Home';
+import List from './pages/List/List';
+import Users from './pages/SignIn/Users';
+import Contact from './pages/Contact/Contact';
 import Navbar from './components/Navbar/Navbar';
-import CreateBlog from './pages/CreateBlog';
+import CreateBlog from './pages/CreateBlog/CreateBlog';
 import BlogHolder from './components/BlogHolder/BlogHolder';
 import ListServicesProvider from './services/ListServices';
+import Footer from './components/Footer/Footer';
 
 
 class App extends Component {
@@ -51,6 +51,11 @@ class App extends Component {
     }
   }
 
+  createUserHandler = () => {
+    fetch('/api/user/create', {
+      method: 'POST'
+    })
+  }
   getListItem = id => {
     console.log('called');
     this.state.list.forEach(x => {
@@ -66,15 +71,17 @@ class App extends Component {
     const App = () => (
       <div>
         <Navbar userName={this.state.user} />
-        <Switch>
-          <Route exact path='/' render={() => <Home user={this.state.user}/>}/>
-          <Route path='/list' render={() => <List goToBlogClick={this.getListItem}/>}/>
-          <Route path='/users' render={() => <Users auth={this.state.userAuth} click={this.signInHandler} />}/>
-          <Route path='/create-new-blog' render={() => <CreateBlog auth={this.state.userAuth} click={this.signInHandler} />}/>
-          <Route path='/contact' component={Contact}/>
-          <Route path='/latest-blog' render={() => <LatestBlog goToBlogClick={this.getListItem}/>}/>
-          <Route path={`/blog-${this.state.listItem._id}`} render={() => <BlogHolder title={this.state.listItem.name} image={this.state.listItem.image} description={this.state.listItem.body}/>}/>
-        </Switch>
+        <div className={styles.RouteDisplayBody}>
+          <Switch>
+            <Route exact path='/' render={() => <Home user={this.state.user}/>}/>
+            <Route path='/list' render={() => <List goToBlogClick={this.getListItem} userType={this.state.userType}/>}/>
+            <Route path='/users' render={() => <Users auth={this.state.userAuth} click={this.signInHandler} />}/>
+            <Route path='/create-new-blog' render={() => <CreateBlog auth={this.state.userAuth} click={this.signInHandler} />}/>
+            <Route path='/contact' component={Contact}/>
+            <Route path={`/blog-${this.state.listItem._id}`} render={() => <BlogHolder title={this.state.listItem.name} image={this.state.listItem.image} description={this.state.listItem.body}/>}/>
+          </Switch>
+        </div>
+        <Footer/>
       </div>
     )
     return (

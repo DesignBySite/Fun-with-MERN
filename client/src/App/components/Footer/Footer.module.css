@@ -1,0 +1,21 @@
+.FooterContainer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+}
+
+.CopyRight {
+    display: grid;
+    grid-template-columns: repeat(2, min-content);
+    grid-column-gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.CopyRight p {
+    margin: 0;
+    line-height: 1;
+}

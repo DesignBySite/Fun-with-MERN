@@ -2,8 +2,12 @@
     display: grid;
     grid-template-columns: 40% 50%;
     justify-content: space-between;
-    background-color: black;
-    height: 40px;
+    background-color: white;
+    height: 60px;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+    z-index: 100;
+    position: absolute;
+    width: 100%;
 }
 
 .OptionBtns {
@@ -15,7 +19,7 @@
     height: 100%;
     width: 100%;
     background-color: transparent;
-    color: white;
+    color: black;
     text-transform: uppercase;
     border: none;
     cursor: pointer;
@@ -24,7 +28,8 @@
 }
 
 .NavbarBtn:hover {
-    background-color: red;
+    background-color: black;
+    color: white;
     font-size: 22px;
 }
 

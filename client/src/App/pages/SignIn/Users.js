@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import styles from './Users.module.css';
+import BodyHOC from '../../HOComponents/BodyHOC/BodyHoc';
 
 class Users extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Users extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <BodyHOC>
         <div className={styles.Title}>
           <h1>Please Sign In</h1>
         </div>
@@ -46,7 +47,7 @@ class Users extends Component {
             Sign in
           </button>
         </div>
-      </React.Fragment>
+      </BodyHOC>
     );
   }
 }

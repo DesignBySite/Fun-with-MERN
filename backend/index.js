@@ -74,7 +74,7 @@ app.get('/api/sign-in/:user/:password', (req, res) => {
 app.post('/api/user/create', (req, res) => {
   const user = {
     userName: "knielsen0506",
-    password: '',
+    password: 'pass',
     first_name: "Kevin",
     last_name: "Nielsen",
     userType: "Admin"
@@ -90,10 +90,13 @@ app.post('/api/user/create', (req, res) => {
 
 // Route to create new blog
 app.post('/api/blog/create', (req, res) => {
-  const name = req.body.name;
-  const image = req.body.image;
-  const description = req.body.body;
-  const createBlog = {name: name, image: image, body: description};
+  const createBlog = {
+    name: req.body.name,
+    image: req.body.image,
+    authorImage: req.body.authorImg,
+    author: req.body.author,
+    body: req.body.body
+  }
   Blog.create(createBlog, (err, res) => {
     if (err) {
       console.log('error', err);

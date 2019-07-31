@@ -31,11 +31,6 @@ class Navbar extends Component {
                             My blogs
                         </button>
                     </Link>
-                    <Link to={'./latest-blog'}>
-                        <button className={styles.NavbarBtn}>
-                            Latest Blog
-                        </button>
-                    </Link>
                     {/* <Link to={'./contact'}>
                         <button className={styles.NavbarBtn}>
                             Contact Me

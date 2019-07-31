@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './BlogHolder.module.css';
+import BodyHOC from '../../HOComponents/BodyHOC/BodyHoc';
 
 class BlogHolder extends Component {
     constructor(props) {
@@ -9,17 +10,21 @@ class BlogHolder extends Component {
     render() {
         console.log(this.props);
         return (
-            <div className={styles.Container}>
-                <div className={styles.BlogContainer}>
-                    <h1 className={styles.Title}>{this.props.title}</h1>
-                    <div className={styles.ImageContainer}>
-                        <img className={styles.Image} src={this.props.image} alt={this.props.title}/>
-                    </div>
-                    <div>
-                        <p>{this.props.description}</p>
+            <BodyHOC>
+                <div className={styles.Container}>
+                    <div className={styles.BlogContainer}>
+                        <div className={styles.ImageContainer}>
+                            <img className={styles.Image} src={this.props.image} alt={this.props.title}/>
+                        </div>
+                        <div className={styles.BlogBodyContainer}>
+                            <h1 className={styles.Title}>{this.props.title}</h1>
+                            <div>
+                                <p>{this.props.description}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </BodyHOC>
         )
     }
 }
