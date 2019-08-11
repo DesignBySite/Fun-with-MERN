@@ -9,9 +9,7 @@ const User = require('./Schemas/user');
 const port = process.env.PORT || 5000;
 let db = mongoose.connection;
 const uri = 'mongodb+srv://knielsen0506:nrpxKReM84!!@kevincluster-93exz.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(uri, {useNewUrlParser: true}, err => {
-  console.log(err);
-});
+mongoose.connect(uri, {useNewUrlParser: true});
 // client.connect(err => {
 //   // const collection = client.db('test').collection('devices');
 //   // console.log(collection);
@@ -24,7 +22,6 @@ mongoose.connect(uri, {useNewUrlParser: true}, err => {
 // Mongoose connection handling
 db.on('unhandledRejection', (reason, promise) => {
   console.log('Unhandled rejection at:', reason.stack || reason);
-
 })
 db.on('error', console.trace.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
@@ -33,11 +30,11 @@ db.once('open', () => {
 
 // Express rules
 // Static File
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'public/index.html')));
 
 // Production mode
 if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'client/build')));
+    app.use(express.static(path.join(__dirname, 'client/build/index.html')));
     app.get('/*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/build/index.html'));
       });
@@ -47,7 +44,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Build mode
-app.get('*', (req, res) => {  res.sendFile(path.join(__dirname, '/public/index.html'));});
+// app.get('*', (req, res) => {  res.sendFile(path.join(__dirname, 'public/index.html'));});
 
 // Gets list of all the current blogs
 app.get('/api/blog/all', (req, res) => {
@@ -56,6 +53,8 @@ app.get('/api/blog/all', (req, res) => {
       console.log(err);
       return;
     }
+    console.log(blogs);
+    
     res.send(blogs);
   })
 });

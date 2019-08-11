@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://designbysite.com/blog",
+  "main": "index.js",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.20",
     "@fortawesome/free-regular-svg-icons": "^5.10.0",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
+    "start": "react-scripts start",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -33,6 +33,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:5000/",
   "browserslist": {
     "production": [
       ">0.2%",
