@@ -8,28 +8,46 @@ const Blog = require('./Schemas/blog');
 const User = require('./Schemas/user');
 const port = process.env.PORT || 5000;
 let db = mongoose.connection;
-
+const uri = 'mongodb+srv://knielsen0506:nrpxKReM84!!@kevincluster-93exz.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(uri, {useNewUrlParser: true}, err => {
+  console.log(err);
+});
+// client.connect(err => {
+//   // const collection = client.db('test').collection('devices');
+//   // console.log(collection);
+//   console.log(err);
+//   client.close()
+// })
 // Connects to mongo db
-mongoose.connect('mongodb://localhost:27017/blogs', {useNewUrlParser: true});
+// mongoose.connect(uri, {useNewUrlParser: true});
 
 // Mongoose connection handling
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled rejection at:', reason.stack || reason);
+
+})
+db.on('error', console.trace.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Successfully connected');
 })
 
 // Express rules
+// Static File
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Production mode
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client/build/index.html'));
+      });
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-  res.append('Access-Control-Allow-Origin' , 'http://localhost:27017');
-  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.append("Access-Control-Allow-Headers", "Origin, Accept,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-  res.append('Access-Control-Allow-Credentials', true);
-  next();
-});
 
+// Build mode
+app.get('*', (req, res) => {  res.sendFile(path.join(__dirname, '/public/index.html'));});
 
 // Gets list of all the current blogs
 app.get('/api/blog/all', (req, res) => {
@@ -74,6 +92,7 @@ app.get('/api/sign-in/:user/:password', (req, res) => {
 app.post('/api/user/create', (req, res) => {
   const user = {
     userName: "knielsen0506",
+    created: Date.now(),
     password: 'pass',
     first_name: "Kevin",
     last_name: "Nielsen",

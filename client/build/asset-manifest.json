@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/blog/static/css/main.9b8cdf18.chunk.css",
+    "main.js": "/blog/static/js/main.fd852461.chunk.js",
+    "main.js.map": "/blog/static/js/main.fd852461.chunk.js.map",
+    "runtime~main.js": "/blog/static/js/runtime~main.516a48d0.js",
+    "runtime~main.js.map": "/blog/static/js/runtime~main.516a48d0.js.map",
+    "static/js/2.d616e8ef.chunk.js": "/blog/static/js/2.d616e8ef.chunk.js",
+    "static/js/2.d616e8ef.chunk.js.map": "/blog/static/js/2.d616e8ef.chunk.js.map",
+    "index.html": "/blog/index.html",
+    "precache-manifest.0c564208ed071022007f741f35a0f8fe.js": "/blog/precache-manifest.0c564208ed071022007f741f35a0f8fe.js",
+    "service-worker.js": "/blog/service-worker.js",
+    "static/css/main.9b8cdf18.chunk.css.map": "/blog/static/css/main.9b8cdf18.chunk.css.map",
+    "static/media/Home.module.css": "/blog/static/media/yellow-background.b98c376f.jpg"
+  }
+}

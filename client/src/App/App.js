@@ -31,6 +31,11 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // this.connectToServer();
+    this.ListServicesProvider.getList().then(res => this.setState({ list: res }));
+  }
+
+  newBlogAdded() {
     this.ListServicesProvider.getList().then(res => this.setState({ list: res }));
   }
 
@@ -76,7 +81,7 @@ class App extends Component {
             <Route exact path='/' render={() => <Home user={this.state.user}/>}/>
             <Route path='/list' render={() => <List goToBlogClick={this.getListItem} userType={this.state.userType}/>}/>
             <Route path='/users' render={() => <Users auth={this.state.userAuth} click={this.signInHandler} />}/>
-            <Route path='/create-new-blog' render={() => <CreateBlog auth={this.state.userAuth} click={this.signInHandler} />}/>
+            <Route path='/create-new-blog' render={() => <CreateBlog auth={this.state.userAuth}  click={() => this.newBlogAdded()} />}/>
             <Route path='/contact' component={Contact}/>
             <Route path={`/blog-${this.state.listItem._id}`} render={() => <BlogHolder title={this.state.listItem.name} image={this.state.listItem.image} description={this.state.listItem.body}/>}/>
           </Switch>

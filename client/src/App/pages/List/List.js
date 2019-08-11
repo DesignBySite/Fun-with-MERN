@@ -56,9 +56,9 @@ class List extends Component {
                                     <div className={styles.Item} key={item._id}>
                                         <Link className={styles.ItemPreview} to={`./blog-${item._id}`} onClick={() => this.props.goToBlogClick(item._id)}>
                                             <img className={styles.Image} src={item.image} alt={item.name} />
-                                            <div>
+                                            {/* need to figure out CORB issues <div>
                                                 <img src={item.authorImage} alt={item.author}/>
-                                            </div>
+                                            </div> */}
                                             <div className={styles.ItemInfoPreview}>
                                                 <p className={styles.Title}>{item.name}</p>
                                                 <p>{item.body}</p>
